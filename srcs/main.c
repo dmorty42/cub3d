@@ -6,7 +6,7 @@
 /*   By: dmorty <dmorty@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:17:19 by dmorty            #+#    #+#             */
-/*   Updated: 2022/01/22 20:51:53 by dmorty           ###   ########.fr       */
+/*   Updated: 2022/01/23 05:19:08 by dmorty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,6 @@ char	**make_map(t_list *lst, int size)
 	return (map);
 }
 
-void	ft_clear_lst(t_list *map)
-{
-	t_list	*temp;
-
-	while (map)
-	{
-		temp = map;
-		map = map->next;
-		free(temp->content);
-		temp->content = NULL;
-		temp->next = NULL;
-		free(temp);
-	}
-}
-
 void	parse_map(char **argv, t_node *data)
 {
 	t_list	*map;
@@ -52,7 +37,6 @@ void	parse_map(char **argv, t_node *data)
 	fd = open(argv[1], O_RDONLY);
 	map = NULL;
 	line = NULL;
-	data->mlx = NULL;
 	while (get_next_line(fd, &line))
 	{
 		ft_lstadd_back(&map, ft_lstnew(line));
@@ -74,53 +58,181 @@ void	all_clear(t_node *data)
 	data->map = NULL;
 }
 
-void	put_square(t_node *data, int x, int y, int color)
+void	draw_wall(t_node *data, int x, int y, int col)
 {
 	int	i;
 	int	j;
 
-	j = y;
-	while (j < y + 32)
+	i = x * SCALE;
+	j = y * SCALE;
+	while (j < (y + 1) * SCALE)
 	{
-		i = x;
-		while (i < x + 32)
-		{
-			mlx_pixel_put(data->mlx, data->win, i, j, color);
-			i++;
-		}
+		i = x * SCALE;
+		while (i < (x + 1) * SCALE)
+			mlx_pixel_put(data->win->mlx, data->win->win, i++, j, col);
 		j++;
 	}
 }
 
-int	main(int argc, char **argv)
+void	draw_back(t_node *data, int x, int y, int col)
 {
-	t_node	*data;
+	int	i;
+	int	j;
+
+	i = x * SCALE;
+	j = y * SCALE;
+	while (j <= (y + 1) * SCALE)
+	{
+		i = x * SCALE;
+		if (j % 2 == 1)
+			while (i <= (x + 1) * SCALE)
+				mlx_pixel_put(data->win->mlx, data->win->win, i++, j, col);
+		else
+			while (i <= (x + 1) * SCALE)
+				mlx_pixel_put(data->win->mlx, data->win->win, i++, j, col * 2);
+		col += 512 / (int)sqrt(SCALE);
+		j++;
+	}
+}
+
+void	init_plr(t_node *data, int x, int y, char c)
+{
+	data->plr->x = x * SCALE;
+	data->plr->y = y * SCALE;
+	if (c == 'N')
+		data->plr->dir = 3 * M_PI_2;
+	else if (c == 'W')
+		data->plr->dir = 0;
+	else if (c == 'S')
+		data->plr->dir = M_PI_2;
+	else if (c == 'E')
+		data->plr->dir = M_PI;
+}
+
+void	ray_cast(t_node *data)
+{
+	float	x;
+	float	y;
+	float	dir;
+	int 	i;
+
+	x = data->plr->x;
+	y = data->plr->y;
+	dir = data->plr->dir - M_PI_4;
+	while (dir < (data->plr->dir + M_PI_4))
+	{
+		i = 0;
+		while (data->map[(int)y / SCALE][(int)x / SCALE] == '1')
+		{
+			mlx_pixel_put(data->win->mlx, data->win->win, x, y, 0xFF00BB);
+			x += cos(dir);
+			y += sin(dir);
+		}
+		x = data->plr->x;
+		y = data->plr->y;
+		dir += 0.03;
+	}
+}
+
+void	draw_player(t_node *data)
+{
 	int	x;
 	int	y;
 
-	y = 0;
-	x = 0;
-	data = (t_node *)malloc(sizeof(t_node));
-	if (argc == 2)
+	x = data->plr->x;
+	y = data->plr->y;
+	while (y <= data->plr->y + sqrt(SCALE))
 	{
-		parse_map(argv, data);
+		x = data->plr->x;
+		while (x <= data->plr->x + sqrt(SCALE))
+			mlx_pixel_put(data->win->mlx, data->win->win, x++, y, 0xFF7731);
+		y++;
 	}
-	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 1920, 1080, "CUB3D");
+	ray_cast(data);
+}
+
+void	draw_map(t_node *data)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
 	while (data->map[y])
 	{
 		x = 0;
 		while (data->map[y][x])
 		{
 			if (data->map[y][x] == '1')
-				put_square(data, (x + 6) * 42, (y + 6) * 42, 0XFFFFFF);
-			else
-				put_square(data, (x + 6) * 42, (y + 6) * 42, 0X000000);
+				draw_wall(data, x, y, 0XFFFFFF);
+			else if (data->map[y][x] == '0')
+				draw_back(data, x, y, 0x99cccc);
+			else if (data->map[y][x] == 'N')
+			{
+				init_plr(data, x, y, data->map[y][x]);
+				data->map[y][x] = '0';
+				draw_back(data, x, y, 0x99cccc);
+			}
 			x++;
 		}
 		y++;
 	}
-	// draw_map(data);
-	mlx_loop(data->mlx);
-	all_clear(data);
+	draw_player(data);
+}
+
+int key_hook(int key, t_node *data)
+{
+	mlx_clear_window(data->win->mlx, data->win->win);
+	if (key == 53)
+		exit(0);
+	if (key == 13)
+	{
+		data->plr->y -= 3;
+		while (data->map[data->plr->y / SCALE][data->plr->x / SCALE] == '1')
+			data->plr->y += 1;
+	}
+	else if (key == 0)
+	{
+		data->plr->x -= 3;
+		while (data->map[data->plr->y / SCALE][data->plr->x / SCALE] == '1')
+			data->plr->x += 1;
+	}
+	else if (key == 1)
+	{
+		data->plr->y += 3;
+		while (data->map[data->plr->y / SCALE][data->plr->x / SCALE] == '1')
+			data->plr->y -= 1;
+	}
+	else if (key == 2)
+	{
+		data->plr->x += 3;
+		while (data->map[data->plr->y / SCALE][data->plr->x / SCALE] == '1')
+			data->plr->x -= 1;
+	}
+	draw_map(data);
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	t_node	*data;
+	t_win	win;
+
+	data = (t_node *)malloc(sizeof(t_node));
+	data->plr = (t_plr *)malloc(sizeof(t_plr));
+	win.mlx = NULL;
+	win.win = NULL;
+	win.height = 720;
+	win.widht = 1080;
+	data->win = &win;
+	if (argc == 2)
+	{
+		parse_map(argv, data);
+	}
+	win.mlx = mlx_init();
+	win.win = mlx_new_window(win.mlx, win.widht, win.height, "CUB3D");
+	draw_map(data);
+	mlx_hook(win.win, 2, 0, &key_hook, data);
+	mlx_loop(win.mlx);
+	// all_clear(data);
 }
