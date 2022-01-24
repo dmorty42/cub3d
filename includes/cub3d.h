@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmorty <dmorty@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:03:22 by dmorty            #+#    #+#             */
-/*   Updated: 2022/01/23 04:41:43 by dmorty           ###   ########.fr       */
+/*   Updated: 2022/01/24 21:57:12 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,22 @@ typedef struct s_plr
 	float	dir;
 }	t_plr;
 
-typedef struct s_node
+typedef struct s_map
 {
 	char	**map;
+	int		w;
+	int		h;
+}	t_map;
+
+typedef struct s_node
+{
+	// char	**map;
 	t_win	*win;
 	t_plr	*plr;
+	t_map	map;
 }	t_node;
+
+
+int	parse_map(t_node *data, char *av);
 
 #endif
