@@ -6,7 +6,7 @@
 /*   By: dmorty <dmorty@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:03:22 by dmorty            #+#    #+#             */
-/*   Updated: 2022/01/23 04:41:43 by dmorty           ###   ########.fr       */
+/*   Updated: 2022/01/25 00:22:23 by dmorty           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "mlx.h"
 # include "../libft/libft.h"
 
-# define SCALE 16
+# define SCALE 64
 
 typedef struct s_win
 {
@@ -33,18 +33,63 @@ typedef struct s_win
 
 typedef struct s_plr
 {
-	int		x;
-	int		y;
-	float	dir_x;
-	float	dir_y;
+	float	x;
+	float	y;
 	float	dir;
+	float	fov;
+	float	speed;
+	float	delta;
 }	t_plr;
+
+typedef struct s_fr
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_l;
+	int		width;
+	int		height;
+	int		en;
+	int		scale;
+}	t_fr;
+
+typedef struct	s_ray
+{
+	int		flag;
+	float	x;
+	float	y;
+	float	len;
+}	t_ray;
 
 typedef struct s_node
 {
 	char	**map;
 	t_win	*win;
 	t_plr	*plr;
+	t_fr	*fr;
+	t_fr	**tex;
+	int		x0;
+	int		y0;
+	int		ray;
 }	t_node;
 
+void	draw(t_node *data);
+int		key_hook(int key, t_node *data);
+t_fr	**load_texture(t_node *data);
+void	draw(t_node *data);
+void	draw_player(t_node *data);
+void	draw_map(t_node *data);
+void	draw_text(t_node *data, t_ray pt, int off, int i);
+void	draw_floor(t_node *data, int x, int y);
+void	ray_cast(t_node *data);
+void	handler(t_node *data, float dir, t_ray ray);
+void	add_texture(t_node *data, float dir, int i, int off);
+void	draw_ceil(t_node *data, int x, int y);
+void	draw_line(t_node *data, int i, float dir);
+void	draw_back(t_node *data, int x, int y, int col);
+void	draw_wall(t_node *data, int x, int y, int col);
+void	parse_map(char **argv, t_node *data);
+char	**make_map(t_list *lst, int size);
+void	undef(t_fr *fr, int x, int y, unsigned int col);
+void	init_plr(t_node *data, int x, int y, char c);
 #endif

@@ -6,7 +6,7 @@
 #    By: dmorty <dmorty@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 02:33:40 by dmorty            #+#    #+#              #
-#    Updated: 2022/01/22 18:34:00 by dmorty           ###   ########.fr        #
+#    Updated: 2022/01/24 23:13:01 by dmorty           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,12 @@ NAME	= cub3d
 CC		= gcc
 FLAGS	= -Wall -Werror -Wextra
 CFLAGS	= $(FLAGS) -I. -Imlx -Ilibft
-SRC		=	./srcs/main.c
+SRC		=	./srcs/main.c \
+			./srcs/draw.c \
+			./srcs/key.c \
+			./srcs/loading_textures.c \
+			./srcs/map.c \
+			./srcs/raycast.c 
 OBJ		= $(SRC:%.c=%.o)
 INC		= ./includes/cub3d.h
 
