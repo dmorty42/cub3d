@@ -6,7 +6,7 @@
 #    By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 02:33:40 by dmorty            #+#    #+#              #
-#    Updated: 2022/01/24 21:41:55 by bprovolo         ###   ########.fr        #
+#    Updated: 2022/01/25 22:23:28 by bprovolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,9 @@ CC		= gcc
 FLAGS	= -Wall -Werror -Wextra
 CFLAGS	= $(FLAGS) -I. -Imlx -Ilibft
 SRC		=	./srcs/main.c \
-			./parser/parser.c
+			./parser/double_map.c \
+			./parser/parser.c \
+			./parser/map_checker.c
 			
 OBJ		= $(SRC:%.c=%.o)
 INC		= ./includes/cub3d.h

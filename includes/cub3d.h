@@ -6,7 +6,7 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:03:22 by dmorty            #+#    #+#             */
-/*   Updated: 2022/01/24 21:57:12 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/01/25 22:23:08 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,26 @@ typedef struct s_plr
 	float	dir;
 }	t_plr;
 
-typedef struct s_map
+typedef struct s_tmap
 {
-	char	**map;
+	char	**cmap;
 	int		w;
 	int		h;
-}	t_map;
+}	t_tmap;
 
 typedef struct s_node
 {
-	// char	**map;
+	char	**map;
 	t_win	*win;
 	t_plr	*plr;
-	t_map	map;
+	t_tmap	tmap;
 }	t_node;
 
 
 int	parse_map(t_node *data, char *av);
+size_t	st_strlen(const char *str);
+int	double_map( t_list *tmap, size_t size, char **cmap);
+int	ft_strcmp(const char *str1, const char *str2);
+int	map_checker(t_list *tmap);
 
 #endif

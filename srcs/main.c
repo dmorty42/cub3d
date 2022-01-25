@@ -6,7 +6,7 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:17:19 by dmorty            #+#    #+#             */
-/*   Updated: 2022/01/24 21:42:32 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/01/25 22:25:48 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,17 @@
 // 	close(fd);
 // }
 
-void	all_clear(t_node *data)
-{
-	int	i;
+// void	all_clear(t_node *data)
+// {
+// 	int	i;
 
-	i = 0;
-	if (data->map)
-	{
-		free(data->map);
-	}
-	data->map = NULL;
-}
+// 	i = 0;
+// 	if (data->map)
+// 	{
+// 		free(data->map);
+// 	}
+// 	data->map = NULL;
+// }
 
 void	draw_wall(t_node *data, int x, int y, int col)
 {
@@ -155,7 +155,6 @@ void	draw_map(t_node *data)
 {
 	int	x;
 	int	y;
-
 	x = 0;
 	y = 0;
 	while (data->map[y])
@@ -225,15 +224,16 @@ int	main(int argc, char **argv)
 	win.height = 720;
 	win.widht = 1080;
 	data->win = &win;
-	if (argc == 2)
-	// {
-	// 	parse_map(argv, data);
-	// }
-		parse_map(data, argv[1]);
-	win.mlx = mlx_init();
-	win.win = mlx_new_window(win.mlx, win.widht, win.height, "CUB3D");
-	draw_map(data);
-	mlx_hook(win.win, 2, 0, &key_hook, data);
-	mlx_loop(win.mlx);
+	if (argc != 2)
+		perror("Error: wrong number of arguments\n");
+	if (parse_map(data, argv[1]) == -1)
+		perror("Error: invalid map\n");
+		
+	// win.mlx = mlx_init();
+	// win.win = mlx_new_window(win.mlx, win.widht, win.height, "CUB3D");
+	// draw_map(data);
+
+	// mlx_hook(win.win, 2, 0, &key_hook, data);
+	// mlx_loop(win.mlx);
 	// all_clear(data);
 }
