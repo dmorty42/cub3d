@@ -14,15 +14,11 @@
 
 int	checker_char(char c)
 {
-	int				i;
-
-	i = -1;
-	while (++i < 7)
-		if (c == ' ' || c == '0'
-			|| c == '1' || c == 'N'
-			|| c == 'S' || c == 'E'
-			|| c == 'W')
-			return (0);
+	if (c == ' ' || c == '0'
+		|| c == '1' || c == 'N'
+		|| c == 'S' || c == 'E'
+		|| c == 'W')
+		return (0);
 	return (-1);
 }
 

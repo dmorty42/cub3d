@@ -61,5 +61,6 @@ size_t	st_strlen(const char *str);
 int	double_map( t_list *tmap, size_t size, char **cmap);
 int	ft_strcmp(const char *str1, const char *str2);
 int	map_checker(t_list *tmap);
+int	check_border(char **cmap);
 
 #endif

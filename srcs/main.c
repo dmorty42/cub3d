@@ -228,7 +228,18 @@ int	main(int argc, char **argv)
 		perror("Error: wrong number of arguments\n");
 	if (parse_map(data, argv[1]) == -1)
 		perror("Error: invalid map\n");
-		
+	int y = 0;
+	while (y < 30)
+	{
+		y++;
+		int i = 0;
+		while (i < 45)
+		{
+			printf("%c", data->tmap.cmap[y][i]);
+			i++;
+		}
+		printf("\n");
+	}
 	// win.mlx = mlx_init();
 	// win.win = mlx_new_window(win.mlx, win.widht, win.height, "CUB3D");
 	// draw_map(data);

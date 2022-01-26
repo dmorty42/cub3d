@@ -17,6 +17,7 @@ CFLAGS	= $(FLAGS) -I. -Imlx -Ilibft
 SRC		=	./srcs/main.c \
 			./parser/double_map.c \
 			./parser/parser.c \
+			./parser/check_border.c \
 			./parser/map_checker.c
 			
 OBJ		= $(SRC:%.c=%.o)

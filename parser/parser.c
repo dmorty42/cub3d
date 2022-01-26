@@ -92,6 +92,8 @@ static int map_writer(t_node *data, t_list *tmap)
 	data->tmap.cmap[size + 2] = NULL;
 	if (double_map(tmap, size + 2, data->tmap.cmap) == -1)
 		return (-1);
+	if (check_border(data->tmap.cmap) == -1)
+		return (-1);
 	player_search(data);
 	return (0);
 }
