@@ -6,7 +6,7 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:17:19 by dmorty            #+#    #+#             */
-/*   Updated: 2022/01/25 22:25:48 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/01/27 19:57:51 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,8 +228,14 @@ int	main(int argc, char **argv)
 		perror("Error: wrong number of arguments\n");
 	if (parse_map(data, argv[1]) == -1)
 		perror("Error: invalid map\n");
+	if (parse_identif(data, argv[1]) == -1)
+		perror("Error:");
+	{
+		/* code */
+	}
+	
 	int y = 0;
-	while (y < 30)
+	while (y < 14)
 	{
 		y++;
 		int i = 0;

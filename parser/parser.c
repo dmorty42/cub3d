@@ -6,7 +6,7 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 19:24:33 by bprovolo          #+#    #+#             */
-/*   Updated: 2022/01/25 22:15:03 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/01/27 19:58:10 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,31 +129,13 @@ static t_list	*map_reader(int fd_map, char *line)
 			readtxt = get_next_line(fd_map, &l);
 	}
 	if (readtxt == -1 || rtext == -1)
-		return(cleaner(&tmap, l));
+		return (cleaner(&tmap, l));
 	rtext = list_line(&tmap, l);
 	if (rtext == -1)
 		return (cleaner(&tmap, l));
 	return (tmap);
-	
 }
 
-int	one_search(char *line)
-{
-	int	unit;
-	int	i;
-	
-	unit = 0;
-	i = 0;
-	while ((line[i] == '1' || line[i] == ' ') && line[i])
-	{
-		if (line[i] == '1')
-			unit = 1;
-		i++;
-	}
-	if (unit > 0 && !line[i])
-		return (1);
-	return (0);
-}
 
 int	parse_map(t_node *data, char *av)
 {
@@ -180,5 +162,5 @@ int	parse_map(t_node *data, char *av)
 		return (-1);
 	readtxt = map_writer(data, tmap);
 	ft_lstclear(&tmap, free);
-	return (readtxt); 	
+	return (readtxt);
 }

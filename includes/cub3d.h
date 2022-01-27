@@ -6,7 +6,7 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:03:22 by dmorty            #+#    #+#             */
-/*   Updated: 2022/01/25 22:23:08 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/01/27 19:57:37 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,7 @@ int	double_map( t_list *tmap, size_t size, char **cmap);
 int	ft_strcmp(const char *str1, const char *str2);
 int	map_checker(t_list *tmap);
 int	check_border(char **cmap);
+int	one_search(char *line);
+int	parser_identif(t_node *data, char *id);
 
 #endif
