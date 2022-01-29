@@ -6,7 +6,7 @@
 #    By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 02:33:40 by dmorty            #+#    #+#              #
-#    Updated: 2022/01/25 22:23:28 by bprovolo         ###   ########.fr        #
+#    Updated: 2022/01/29 20:33:07 by bprovolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,10 @@ SRC		=	./srcs/main.c \
 			./parser/double_map.c \
 			./parser/parser.c \
 			./parser/check_border.c \
-			./parser/map_checker.c
+			./parser/map_checker.c \
+			./parser/one_search.c \
+			./parser/parser_id.c \
+			./parser/all_identif.c 
 			
 OBJ		= $(SRC:%.c=%.o)
 INC		= ./includes/cub3d.h

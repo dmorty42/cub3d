@@ -6,11 +6,24 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:40:06 by bprovolo          #+#    #+#             */
-/*   Updated: 2022/01/27 20:14:00 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/01/30 01:29:17 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	identif_free(char **arr)
+{
+	size_t	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
 
 int	one_identif(t_node *data, char *line)
 {
@@ -21,7 +34,7 @@ int	one_identif(t_node *data, char *line)
 	if (!l_sp)
 		return (-1);
 	readtxt = all_identif(data, l_sp);
-	free_str_arr(l_sp);
+	identif_free(l_sp);
 	return (readtxt);
 }
 
@@ -37,7 +50,7 @@ int	text_read(t_node *data, int fd_map)
 	{
 		if (ft_strcmp(line, "") != 0)
 		{
-			readtxt = get_one_id(data, line);
+			readtxt = one_identif(data, line);
 			free(line);
 			if (readtxt == -1)
 				return (-1);
@@ -49,12 +62,12 @@ int	text_read(t_node *data, int fd_map)
 	if (readtxt == -1)
 		return (-1);
 	if (ft_strcmp(line, "") != 0 && one_search(line) == 0)
-		readtxt = get_one_id(data, line);
+		readtxt = one_identif(data, line);
 	free(line);
 	return (readtxt);
 }
 
-int	parser_identif(t_node *data, char *id)
+int	parse_identif(t_node *data, char *id)
 {
 	int	fd_map;
 	int readtxt;
@@ -65,5 +78,5 @@ int	parser_identif(t_node *data, char *id)
 	// }
 	fd_map = open(id, O_RDONLY);
 	readtxt = text_read(data, fd_map);
-	
+	return (0);
 }

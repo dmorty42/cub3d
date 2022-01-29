@@ -6,7 +6,7 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:17:19 by dmorty            #+#    #+#             */
-/*   Updated: 2022/01/27 19:57:51 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/01/30 02:49:34 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,15 +224,16 @@ int	main(int argc, char **argv)
 	win.height = 720;
 	win.widht = 1080;
 	data->win = &win;
+	// data->tmap.floor = 0;
 	if (argc != 2)
 		perror("Error: wrong number of arguments\n");
-	if (parse_map(data, argv[1]) == -1)
-		perror("Error: invalid map\n");
 	if (parse_identif(data, argv[1]) == -1)
 		perror("Error:");
-	{
-		/* code */
-	}
+	if (parse_map(data, argv[1]) == -1)
+		perror("Error: invalid map\n");
+	// {
+	// 	/* code */
+	// }
 	
 	int y = 0;
 	while (y < 14)
@@ -241,11 +242,15 @@ int	main(int argc, char **argv)
 		int i = 0;
 		while (i < 45)
 		{
-			printf("%c", data->tmap.cmap[y][i]);
+			printf("|%c", data->tmap.cmap[y][i]);
 			i++;
 		}
 		printf("\n");
 	}
+	printf("#%d#\n", data->tmap.floor);
+	printf("#%d#\n", data->tmap.ceilling);
+		printf("#%s#\n", data->tmap.east);
+	printf("#%s#\n", data->tmap.north);
 	// win.mlx = mlx_init();
 	// win.win = mlx_new_window(win.mlx, win.widht, win.height, "CUB3D");
 	// draw_map(data);

@@ -6,7 +6,7 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:03:22 by dmorty            #+#    #+#             */
-/*   Updated: 2022/01/27 19:57:37 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/01/30 02:34:23 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ typedef struct s_tmap
 	char	**cmap;
 	int		w;
 	int		h;
+	char	*north;
+	char	*west;
+	char	*south;
+	char	*east;
+	int		ceilling;
+	int		floor;
 }	t_tmap;
 
 typedef struct s_node
@@ -55,7 +61,6 @@ typedef struct s_node
 	t_tmap	tmap;
 }	t_node;
 
-
 int	parse_map(t_node *data, char *av);
 size_t	st_strlen(const char *str);
 int	double_map( t_list *tmap, size_t size, char **cmap);
@@ -63,6 +68,8 @@ int	ft_strcmp(const char *str1, const char *str2);
 int	map_checker(t_list *tmap);
 int	check_border(char **cmap);
 int	one_search(char *line);
-int	parser_identif(t_node *data, char *id);
+int	parse_identif(t_node *data, char *id);
+int	all_identif(t_node *data, char **l_sp);
+void	identif_free(char **arr);
 
 #endif
