@@ -12,7 +12,6 @@
 
 #include "../includes/cub3d.h" 
 
-
 static int	ft_rgb(char *str)
 {
 	int		i;
@@ -38,6 +37,7 @@ static int	ft_rgb(char *str)
 	return (i);
 } 
 
+
 static int	writer_identif(t_node *data, char **ln)
 {
 	int				color;
@@ -53,7 +53,7 @@ static int	writer_identif(t_node *data, char **ln)
 	if (!ft_strcmp("EA", ln[0]))
 		data->tmap.east = ln[1];
 	if (!ft_strcmp("NO", ln[0]))
-			data->tmap.north = ln[1];
+		data->tmap.north = ln[1];
 	color = 0;
 	// if (iter < 4)
 	// 	if (get_texture(data->mlx,

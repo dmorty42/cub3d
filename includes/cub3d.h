@@ -69,7 +69,7 @@ int	map_checker(t_list *tmap);
 int	check_border(char **cmap);
 int	one_search(char *line);
 int	parse_identif(t_node *data, char *id);
-int	all_identif(t_node *data, char **l_sp);
+int		all_identif(t_node *data, char **l_sp);
 void	identif_free(char **arr);
 
 #endif

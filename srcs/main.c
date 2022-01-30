@@ -249,8 +249,11 @@ int	main(int argc, char **argv)
 	}
 	printf("#%d#\n", data->tmap.floor);
 	printf("#%d#\n", data->tmap.ceilling);
-		printf("#%s#\n", data->tmap.east);
+	printf("#%s#\n", data->tmap.east);
 	printf("#%s#\n", data->tmap.north);
+	printf("#%s#\n", data->tmap.west);
+	printf("#%s#\n", data->tmap.south);
+
 	// win.mlx = mlx_init();
 	// win.win = mlx_new_window(win.mlx, win.widht, win.height, "CUB3D");
 	// draw_map(data);
