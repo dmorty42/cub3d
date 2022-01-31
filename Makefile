@@ -22,7 +22,11 @@ SRC		=	./srcs/main.c \
 			./parser/one_search.c \
 			./parser/parser_id.c \
 			./parser/all_identif.c 
-			
+			./srcs/draw.c \
+			./srcs/key.c \
+			./srcs/loading_textures.c \
+			./srcs/map.c \
+			./srcs/raycast.c 
 OBJ		= $(SRC:%.c=%.o)
 INC		= ./includes/cub3d.h
 
