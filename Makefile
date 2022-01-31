@@ -21,7 +21,7 @@ SRC		=	./srcs/main.c \
 			./parser/map_checker.c \
 			./parser/one_search.c \
 			./parser/parser_id.c \
-			./parser/all_identif.c 
+			./parser/all_identif.c \
 			./srcs/draw.c \
 			./srcs/key.c \
 			./srcs/loading_textures.c \

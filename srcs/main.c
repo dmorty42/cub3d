@@ -58,44 +58,6 @@
 // 	data->map = NULL;
 // }
 
-void	draw_wall(t_node *data, int x, int y, int col)
-{
-	int	i;
-	int	j;
-
-	i = x * SCALE;
-	j = y * SCALE;
-	while (j < (y + 1) * SCALE)
-	{
-		i = x * SCALE;
-		while (i < (x + 1) * SCALE)
-			mlx_pixel_put(data->win->mlx, data->win->win, i++, j, col);
-		j++;
-	}
-}
-
-void	draw_back(t_node *data, int x, int y, int col)
-{
-	int	i;
-	int	j;
-
-	i = x * SCALE;
-	j = y * SCALE;
-	while (j <= (y + 1) * SCALE)
-	{
-		i = x * SCALE;
-		if (j % 2 == 1)
-			while (i <= (x + 1) * SCALE)
-				mlx_pixel_put(data->win->mlx, data->win->win, i++, j, col);
-		else
-			while (i <= (x + 1) * SCALE)
-				mlx_pixel_put(data->win->mlx, data->win->win, i++, j, col * 2);
-		col += 512 / (int)sqrt(SCALE);
-		j++;
-	}
-}
-
-
 void	init_plr(t_node *data, int x, int y, char c)
 {
 	data->plr->x = x * SCALE + (SCALE >> 1);
@@ -136,22 +98,13 @@ int	main(int argc, char **argv)
 		perror("Error: invalid map\n");
 	data->x0 = data->win->widht >> 1;
 	data->y0 = data->win->height >> 1;
-	if (argc == 2)
-	{
-		y++;
-		int i = 0;
-		while (i < 45)
-		{
-			printf("|%c", data->tmap.cmap[y][i]);
-			i++;
-		}
-		printf("\n");
-	}
-	win.mlx = mlx_init();
-	win.win = mlx_new_window(win.mlx, win.widht, win.height, "CUB3D");
-	data->tex = load_texture(data);
-	draw(data);
-	mlx_hook(win.win, 2, 0, &key_hook, data);
-	mlx_loop(win.mlx);
+//	win.mlx = mlx_init();
+//	win.win = mlx_new_window(win.mlx, win.widht, win.height, "CUB3D");
+//	data->tex = load_texture(data);
+    for(int i = 0; data->tmap.cmap[i]; i++)
+        printf("%s\n", data->tmap.cmap[i]);
+//	draw(data);
+//	mlx_hook(win.win, 2, 0, &key_hook, data);
+//	mlx_loop(win.mlx);
 	// all_clear(data);
 }

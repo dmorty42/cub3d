@@ -80,7 +80,7 @@ typedef struct s_node
 	t_win	*win;
 	t_plr	*plr;
 	t_tmap	tmap;
-  t_fr	*fr;
+    t_fr	*fr;
 	t_fr	**tex;
 	int		x0;
 	int		y0;
@@ -97,8 +97,6 @@ int	one_search(char *line);
 int	parse_identif(t_node *data, char *id);
 int		all_identif(t_node *data, char **l_sp);
 void	identif_free(char **arr);
-
-
 void	draw(t_node *data);
 int		key_hook(int key, t_node *data);
 t_fr	**load_texture(t_node *data);
@@ -114,7 +112,6 @@ void	draw_ceil(t_node *data, int x, int y);
 void	draw_line(t_node *data, int i, float dir);
 void	draw_back(t_node *data, int x, int y, int col);
 void	draw_wall(t_node *data, int x, int y, int col);
-void	parse_map(char **argv, t_node *data);
 char	**make_map(t_list *lst, int size);
 void	undef(t_fr *fr, int x, int y, unsigned int col);
 void	init_plr(t_node *data, int x, int y, char c);

@@ -100,6 +100,5 @@ int	all_identif(t_node *data, char **l_sp)
 	// }
 	if (j > 6)
 		return (-1);
-	printf("line=%s\n", l_sp[0]);
 	return (writer_identif(data, l_sp));
 }

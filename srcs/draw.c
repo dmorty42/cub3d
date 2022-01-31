@@ -17,8 +17,8 @@ void	draw(t_node *data)
 	data->fr->img = mlx_new_image(data->win->mlx, data->win->widht, data->win->height);
 	data->fr->addr = mlx_get_data_addr(data->fr->img, &data->fr->bpp, &data->fr->line_l, &data->fr->en);
 	draw_map(data);
-	ray_cast(data);
-	draw_player(data);
+//	ray_cast(data);
+//	draw_player(data);
 	mlx_put_image_to_window(data->win->mlx, data->win->win, data->fr->img, 0, 0);
 	mlx_destroy_image(data->win->mlx, data->fr->img);
 }

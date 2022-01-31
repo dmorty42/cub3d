@@ -36,23 +36,23 @@ char	**make_map(t_list *lst, int size)
 	return (map);
 }
 
-void	parse_map(char **argv, t_node *data)
-{
-	t_list	*map;
-	int		fd;
-	char	*line;
-
-	fd = open(argv[1], O_RDONLY);
-	map = NULL;
-	line = NULL;
-	while (get_next_line(fd, &line))
-	{
-		ft_lstadd_back(&map, ft_lstnew(line));
-	}
-	ft_lstadd_back(&map, ft_lstnew(line));
-	data->map = make_map(map, ft_lstsize(map));
-	close(fd);
-}
+//void	parse_map(char **argv, t_node *data)
+//{
+//	t_list	*map;
+//	int		fd;
+//	char	*line;
+//
+//	fd = open(argv[1], O_RDONLY);
+//	map = NULL;
+//	line = NULL;
+//	while (get_next_line(fd, &line))
+//	{
+//		ft_lstadd_back(&map, ft_lstnew(line));
+//	}
+//	ft_lstadd_back(&map, ft_lstnew(line));
+//	data->map = make_map(map, ft_lstsize(map));
+//	close(fd);
+//}
 
 void	draw_wall(t_node *data, int x, int y, int col)
 {
