@@ -3,14 +3,98 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmorty <dmorty@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:17:19 by dmorty            #+#    #+#             */
-/*   Updated: 2022/01/25 00:09:22 by dmorty           ###   ########.fr       */
+/*   Updated: 2022/01/30 02:49:34 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+// char	**make_map(t_list *lst, int size)
+// {
+// 	char	**map;
+// 	int		i;
+
+// 	i = -1;
+// 	map = (char **)malloc(sizeof(char *) * (size + 1));
+// 	map[size] = NULL;
+// 	while (lst)
+// 	{
+// 		map[++i] = ft_strdup(lst->content);
+// 		lst = lst->next;
+// 	}
+// 	return (map);
+// }
+
+// void	parse_map(char **argv, t_node *data)
+// {
+// 	t_list	*map;
+// 	int		fd;
+// 	char	*line;
+
+// 	fd = open(argv[1], O_RDONLY);
+// 	map = NULL;
+// 	line = NULL;
+// 	while (get_next_line(fd, &line))
+// 	{
+// 		ft_lstadd_back(&map, ft_lstnew(line));
+// 	}
+// 	ft_lstadd_back(&map, ft_lstnew(line));
+// 	data->map = make_map(map, ft_lstsize(map));
+// 	close(fd);
+// }
+
+// void	all_clear(t_node *data)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	if (data->map)
+// 	{
+// 		free(data->map);
+// 	}
+// 	data->map = NULL;
+// }
+
+void	draw_wall(t_node *data, int x, int y, int col)
+{
+	int	i;
+	int	j;
+
+	i = x * SCALE;
+	j = y * SCALE;
+	while (j < (y + 1) * SCALE)
+	{
+		i = x * SCALE;
+		while (i < (x + 1) * SCALE)
+			mlx_pixel_put(data->win->mlx, data->win->win, i++, j, col);
+		j++;
+	}
+}
+
+void	draw_back(t_node *data, int x, int y, int col)
+{
+	int	i;
+	int	j;
+
+	i = x * SCALE;
+	j = y * SCALE;
+	while (j <= (y + 1) * SCALE)
+	{
+		i = x * SCALE;
+		if (j % 2 == 1)
+			while (i <= (x + 1) * SCALE)
+				mlx_pixel_put(data->win->mlx, data->win->win, i++, j, col);
+		else
+			while (i <= (x + 1) * SCALE)
+				mlx_pixel_put(data->win->mlx, data->win->win, i++, j, col * 2);
+		col += 512 / (int)sqrt(SCALE);
+		j++;
+	}
+}
+
 
 void	init_plr(t_node *data, int x, int y, char c)
 {
@@ -29,6 +113,7 @@ void	init_plr(t_node *data, int x, int y, char c)
 		data->plr->dir = M_PI;
 }
 
+
 int	main(int argc, char **argv)
 {
 	t_node	*data;
@@ -43,11 +128,24 @@ int	main(int argc, char **argv)
 	win.widht = 1080;
 	data->fr->scale = win.widht / 30;
 	data->win = &win;
+	if (argc != 2)
+		perror("Error: wrong number of arguments\n");
+	if (parse_identif(data, argv[1]) == -1)
+		perror("Error:");
+	if (parse_map(data, argv[1]) == -1)
+		perror("Error: invalid map\n");
 	data->x0 = data->win->widht >> 1;
 	data->y0 = data->win->height >> 1;
 	if (argc == 2)
 	{
-		parse_map(argv, data);
+		y++;
+		int i = 0;
+		while (i < 45)
+		{
+			printf("|%c", data->tmap.cmap[y][i]);
+			i++;
+		}
+		printf("\n");
 	}
 	win.mlx = mlx_init();
 	win.win = mlx_new_window(win.mlx, win.widht, win.height, "CUB3D");

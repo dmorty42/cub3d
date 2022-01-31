@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dmorty <dmorty@student.42.fr>              +#+  +:+       +#+         #
+#    By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 02:33:40 by dmorty            #+#    #+#              #
-#    Updated: 2022/01/24 23:13:01 by dmorty           ###   ########.fr        #
+#    Updated: 2022/01/29 20:33:07 by bprovolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,13 @@ CC		= gcc
 FLAGS	= -Wall -Werror -Wextra
 CFLAGS	= $(FLAGS) -I. -Imlx -Ilibft
 SRC		=	./srcs/main.c \
+			./parser/double_map.c \
+			./parser/parser.c \
+			./parser/check_border.c \
+			./parser/map_checker.c \
+			./parser/one_search.c \
+			./parser/parser_id.c \
+			./parser/all_identif.c 
 			./srcs/draw.c \
 			./srcs/key.c \
 			./srcs/loading_textures.c \

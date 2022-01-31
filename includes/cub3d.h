@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmorty <dmorty@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:03:22 by dmorty            #+#    #+#             */
-/*   Updated: 2022/01/25 00:22:23 by dmorty           ###   ########.fr       */
+/*   Updated: 2022/01/30 02:34:23 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,19 @@ typedef struct s_plr
 	float	delta;
 }	t_plr;
 
+typedef struct s_tmap
+{
+	char	**cmap;
+	int		w;
+	int		h;
+	char	*north;
+	char	*west;
+	char	*south;
+	char	*east;
+	int		ceilling;
+	int		floor;
+}	t_tmap;
+
 typedef struct s_fr
 {
 	void	*img;
@@ -66,12 +79,25 @@ typedef struct s_node
 	char	**map;
 	t_win	*win;
 	t_plr	*plr;
-	t_fr	*fr;
+	t_tmap	tmap;
+  t_fr	*fr;
 	t_fr	**tex;
 	int		x0;
 	int		y0;
 	int		ray;
 }	t_node;
+
+int	parse_map(t_node *data, char *av);
+size_t	st_strlen(const char *str);
+int	double_map( t_list *tmap, size_t size, char **cmap);
+int	ft_strcmp(const char *str1, const char *str2);
+int	map_checker(t_list *tmap);
+int	check_border(char **cmap);
+int	one_search(char *line);
+int	parse_identif(t_node *data, char *id);
+int		all_identif(t_node *data, char **l_sp);
+void	identif_free(char **arr);
+
 
 void	draw(t_node *data);
 int		key_hook(int key, t_node *data);
