@@ -6,7 +6,7 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:03:22 by dmorty            #+#    #+#             */
-/*   Updated: 2022/01/30 02:34:23 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/02/01 19:41:27 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,23 @@ typedef struct s_node
 	t_win	*win;
 	t_plr	*plr;
 	t_tmap	tmap;
-    t_fr	*fr;
+	t_fr	*fr;
 	t_fr	**tex;
 	int		x0;
 	int		y0;
 	int		ray;
 }	t_node;
 
-int	parse_map(t_node *data, char *av);
+int		parse_map(t_node *data, char *av);
 size_t	st_strlen(const char *str);
-int	double_map( t_list *tmap, size_t size, char **cmap);
-int	ft_strcmp(const char *str1, const char *str2);
-int	map_checker(t_list *tmap);
-int	check_border(char **cmap);
-int	one_search(char *line);
-int	parse_identif(t_node *data, char *id);
+int		double_map( t_list *tmap, size_t size, char **cmap);
+int		ft_strcmp(const char *str1, const char *str2);
+int		map_checker(t_list *tmap);
+int		check_border(char **cmap);
+int		one_search(char *line);
+int		parse_identif(t_node *data, char *id);
+void	*cleaner(t_list **map, char *str);
+int		list_line(t_list **tmap, char *line);
 int		all_identif(t_node *data, char **l_sp);
 void	identif_free(char **arr);
 void	draw(t_node *data);

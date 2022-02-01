@@ -6,7 +6,7 @@
 #    By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 02:33:40 by dmorty            #+#    #+#              #
-#    Updated: 2022/01/29 20:33:07 by bprovolo         ###   ########.fr        #
+#    Updated: 2022/02/01 19:41:52 by bprovolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC		=	./srcs/main.c \
 			./parser/one_search.c \
 			./parser/parser_id.c \
 			./parser/all_identif.c \
+			./parser/parser_utils.c \
 			./srcs/draw.c \
 			./srcs/key.c \
 			./srcs/loading_textures.c \

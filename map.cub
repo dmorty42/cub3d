@@ -1,14 +1,14 @@
-WE  textures/west.xpm
+WE                      textures/west.xpm
 SO      textures/south.xpm
 EA   textures/east.xpm
 
 
-NO  textures/north.xpm
+NO                  textures/north.xpm
 
-F  0,89,0
+F                   0,89,0
 
 
-C  255,205,255
+C            255,205,255
 
         1111111111111111111111111
         1000000000110000000000001

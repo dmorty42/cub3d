@@ -6,57 +6,11 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:17:19 by dmorty            #+#    #+#             */
-/*   Updated: 2022/01/30 02:49:34 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/01/31 20:50:25 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-// char	**make_map(t_list *lst, int size)
-// {
-// 	char	**map;
-// 	int		i;
-
-// 	i = -1;
-// 	map = (char **)malloc(sizeof(char *) * (size + 1));
-// 	map[size] = NULL;
-// 	while (lst)
-// 	{
-// 		map[++i] = ft_strdup(lst->content);
-// 		lst = lst->next;
-// 	}
-// 	return (map);
-// }
-
-// void	parse_map(char **argv, t_node *data)
-// {
-// 	t_list	*map;
-// 	int		fd;
-// 	char	*line;
-
-// 	fd = open(argv[1], O_RDONLY);
-// 	map = NULL;
-// 	line = NULL;
-// 	while (get_next_line(fd, &line))
-// 	{
-// 		ft_lstadd_back(&map, ft_lstnew(line));
-// 	}
-// 	ft_lstadd_back(&map, ft_lstnew(line));
-// 	data->map = make_map(map, ft_lstsize(map));
-// 	close(fd);
-// }
-
-// void	all_clear(t_node *data)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (data->map)
-// 	{
-// 		free(data->map);
-// 	}
-// 	data->map = NULL;
-// }
 
 void	init_plr(t_node *data, int x, int y, char c)
 {
@@ -74,7 +28,6 @@ void	init_plr(t_node *data, int x, int y, char c)
 	else if (c == 'E')
 		data->plr->dir = M_PI;
 }
-
 
 int	main(int argc, char **argv)
 {
