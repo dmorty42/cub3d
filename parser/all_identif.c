@@ -6,7 +6,7 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 19:43:14 by bprovolo          #+#    #+#             */
-/*   Updated: 2022/01/30 02:48:58 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/02/01 19:45:00 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	all_identif(t_node *data, char **l_sp)
 	// {
 		
 	// 		break ;
-		j ++;
+	j ++;
 	// }
 	if (j > 6)
 		return (-1);
