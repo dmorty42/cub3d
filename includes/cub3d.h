@@ -6,7 +6,7 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 18:03:22 by dmorty            #+#    #+#             */
-/*   Updated: 2022/02/01 19:41:27 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/02/01 22:58:12 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ typedef struct s_tmap
 	char	*east;
 	int		ceilling;
 	int		floor;
+	int		cN;
+	int		cS;
+	int		cW;
+	int		cE;
+	int		cC;
+	int		cF;
 }	t_tmap;
 
 typedef struct s_fr
@@ -94,11 +100,15 @@ int		ft_strcmp(const char *str1, const char *str2);
 int		map_checker(t_list *tmap);
 int		check_border(char **cmap);
 int		one_search(char *line);
+int		exit_pars_error(char c);
 int		parse_identif(t_node *data, char *id);
 void	*cleaner(t_list **map, char *str);
 int		list_line(t_list **tmap, char *line);
 int		all_identif(t_node *data, char **l_sp);
+int		search_texture(t_node *data, char **ln);
+int		checker_file(char *map);
 void	identif_free(char **arr);
+int		while_gnl(int fd_map);
 void	draw(t_node *data);
 int		key_hook(int key, t_node *data);
 t_fr	**load_texture(t_node *data);

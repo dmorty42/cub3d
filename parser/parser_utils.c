@@ -6,7 +6,7 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 19:23:46 by bprovolo          #+#    #+#             */
-/*   Updated: 2022/02/01 19:42:29 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/02/01 20:51:41 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,32 @@ int	ft_strcmp(const char *str1, const char *str2)
 		i++;
 	}
 	return (str1[i] - str2[i]);
+}
+
+int	while_gnl(int fd_map)
+{
+	int		readtxt;
+	char	*line;
+
+	readtxt = get_next_line(fd_map, &line);
+	while (0 < readtxt)
+	{
+		free(line);
+		readtxt = get_next_line(fd_map, &line); // gnl return ?
+	}
+	free(line);
+	if (readtxt == -1)
+		return (-1);
+	return (0);
+}
+
+int	exit_pars_error(char c)
+{
+	if (c == '1')
+		printf("Error: wrong number of arguments\n");
+	if (c == '2')
+		printf("Invalid identifiers\n");
+	if (c == '3')
+		printf("Invalid map\n");
+	return (EXIT_FAILURE);
 }
