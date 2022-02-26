@@ -6,7 +6,7 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:40:06 by bprovolo          #+#    #+#             */
-/*   Updated: 2022/01/30 01:29:17 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/02/01 23:03:54 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,25 @@ int	text_read(t_node *data, int fd_map)
 int	parse_identif(t_node *data, char *id)
 {
 	int	fd_map;
-	int readtxt;
+	int	readtxt;
 
-	// if (/* condition */)
-	// {
-	// 	/* code */
-	// }
+	if (checker_file(id) == -1)
+		return (-1);
 	fd_map = open(id, O_RDONLY);
 	readtxt = text_read(data, fd_map);
+	if (data->tmap.floor == -1
+		|| data->tmap.ceilling == -1 || readtxt == -1)
+	{
+		close(fd_map);
+		return (-1);
+	}
+	if (data->tmap.cW != 1 || data->tmap.cS != 1
+		|| data->tmap.cE != 1 || data->tmap.cN != 1
+		|| data->tmap.cC != 1 || data->tmap.cF != 1)
+		return (-1);
+	readtxt = while_gnl(fd_map);
+	close(fd_map);
+	if (readtxt == -1)
+		return (-1);
 	return (0);
 }

@@ -6,28 +6,18 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 19:24:33 by bprovolo          #+#    #+#             */
-/*   Updated: 2022/01/27 19:58:10 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/02/01 23:17:53 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	*cleaner(t_list **head, char *str)
-{
-	if (head)
-		ft_lstclear(head, free);
-	if (str)
-		free(str);
-	return (NULL);
-}
-
 static void	player_search(t_node *data)
 {
-	int	i;
-	int j;
-	char **cmap;
+	int		i;
+	int		j;
+	char	**cmap;
 
-	
 	cmap = data->tmap.cmap;
 	data->tmap.w = st_strlen(cmap[0]);
 	i = 0;
@@ -50,20 +40,6 @@ static void	player_search(t_node *data)
 	}
 }
 
-int	ft_strcmp(const char *str1, const char *str2)
-{
-	int	i;
-
-	i = 0;
-	while (str1[i] || str2[i])
-	{
-		if (str1[i] != str2[i])
-			return (str1[i] - str2[i]);
-		i++;
-	}
-	return (str1[i] - str2[i]);
-}
-
 size_t	map_meter(t_list *tmap)
 {
 	size_t	size;
@@ -78,17 +54,17 @@ size_t	map_meter(t_list *tmap)
 	return (size);
 }
 
-
-
-static int map_writer(t_node *data, t_list *tmap)
+static int	map_writer(t_node *data, t_list *tmap)
 {
-	size_t	size = 0;
+	size_t	size;
+
+	size = 0;
 	if (map_checker(tmap) == -1)
 		return (-1);
 	size = map_meter(tmap);
 	data->tmap.cmap = (char **)malloc(sizeof(char *) * (size + 3));
-	// if (!data->map.map)
-		// return
+	if (!data->tmap.cmap)
+		return (-1);
 	data->tmap.cmap[size + 2] = NULL;
 	if (double_map(tmap, size + 2, data->tmap.cmap) == -1)
 		return (-1);
@@ -98,24 +74,13 @@ static int map_writer(t_node *data, t_list *tmap)
 	return (0);
 }
 
-static	int	list_line(t_list **tmap, char *line)
-{
-	t_list	*new;
-
-	new = ft_lstnew(line);
-	if (!new)
-		return (1);
-	ft_lstadd_back(tmap, new);
-	return (0);
-}
-
 static t_list	*map_reader(int fd_map, char *line)
 {
 	t_list	*tmap;
 	char	*l;
 	int		readtxt;
 	int		rtext;
-	
+
 	tmap = NULL;
 	rtext = 1;
 	if (list_line(&tmap, line))
@@ -135,7 +100,6 @@ static t_list	*map_reader(int fd_map, char *line)
 		return (cleaner(&tmap, l));
 	return (tmap);
 }
-
 
 int	parse_map(t_node *data, char *av)
 {

@@ -6,7 +6,7 @@
 /*   By: bprovolo <bprovolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 21:25:20 by bprovolo          #+#    #+#             */
-/*   Updated: 2022/01/25 21:45:22 by bprovolo         ###   ########.fr       */
+/*   Updated: 2022/02/01 19:43:52 by bprovolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	double_map( t_list *tmap, size_t size, char **cmap)
 		else
 		{
 			cmap[i] = value_line((char *)tmap->content, l + 2);
-			tmap =tmap->next;
+			tmap = tmap->next;
 		}
 		if (!cmap[i])
 			return (-1);
